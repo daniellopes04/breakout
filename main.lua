@@ -1,19 +1,11 @@
 --[[
     Part of "S50's Intro to Game Development"
-    Lecture 1
+    Lecture 2
     
     -- Implementation of mobile game "Flappy Bird" --
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
 ]]
-
--- Push library
--- https://github.com/Ulydev/push
-push = require "lib/push"
-
--- Class library
--- https://github.com/vrld/hump/blob/master/class.lua
-Class = require "lib/class"
 
 require "src/Dependencies"
 
@@ -99,4 +91,27 @@ function love.update(dt)
     love.keyboard.keysPressed = {}
 end
 
+-- Renders the game to the screen
+function love.draw()
+    push:start()
 
+    local brackgroundWidth = gTextures["background"]:getWidth()
+    local brackgroundHeight = gTextures["background"]:getHeight()
+
+    -- Scale factors used on x and y axis so it fills the screen
+    love.graphics.draw(gTextures["background"], 0, 0, 0, 
+        VIRTUAL_WIDTH / (brackgroundWidth - 1), VIRTUAL_HEIGHT / (brackgroundHeight - 1))
+
+    gStateMachine:render()
+
+    displayFPS()
+
+    push:finish()
+end
+
+-- Renders the current FPS
+function displayFPS()
+    love.graphics.setFont(gFonts["small"])
+    love.graphics.setColor(0, 1, 0, 1)
+    love.graphics.print("FPS: ".. tostring(love.timer.getFPS()), 5, 5)
+end
