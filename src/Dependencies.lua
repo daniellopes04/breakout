@@ -20,7 +20,11 @@ Class = require "lib/class"
 -- All the constants centralized
 require "src/constants"
 
+-- Utility functions
+require "src/Util"
+
 -- State machine and the game states
 require "src/StateMachine"
 require "src/states/BaseState"
 require "src/states/StartState"
+require "src/states/PlayState"

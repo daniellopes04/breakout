@@ -52,6 +52,11 @@ function love.load()
         ["music"] = love.audio.newSource("sounds/music.wav", "static")
     }
 
+    -- Quads that will be generated for all of the textures
+    gFrames = {
+        ["paddles"] = GenerateQuadsPaddles(gTextures["main"])
+    }
+
     -- Setting up the screen
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
