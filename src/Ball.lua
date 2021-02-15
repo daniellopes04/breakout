@@ -6,9 +6,9 @@
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
 
-    Defines a paddle that can move left and right. It deflects the ball in the main game 
-    and if the ball passes the paddle, the player loses a heart. The player can select the 
-    paddle skin upon starting the game.
+    Defines a ball that bounces back and forth between the sides of the screen, the player's
+    paddle and the bricks laid out above the paddle. The ball will have a skin, which is a 
+    color set at random just for visual variety.
 ]]
 
 Ball = Class{}
