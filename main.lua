@@ -54,7 +54,8 @@ function love.load()
 
     -- Quads that will be generated for all of the textures
     gFrames = {
-        ["paddles"] = GenerateQuadsPaddles(gTextures["main"])
+        ["paddles"] = GenerateQuadsPaddles(gTextures["main"]),
+        ["balls"] = GenerateQuadsBalls(gTextures["main"])
     }
 
     -- Setting up the screen

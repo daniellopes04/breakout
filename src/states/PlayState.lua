@@ -16,10 +16,19 @@
 PlayState = Class{__includes = BaseState}
 
 function PlayState:init()
+    -- Initialize the paddle sets it as not paused
     self.paddle = Paddle()
 
-    -- If the paddle is paused
     self.paused = false
+
+    -- Initialize the ball and its position, velocity and skin
+    self.ball = Ball(math.random(7))
+
+    self.ball.dx = math.random(-200, 200)
+    self.ball.dy = math.random(-50,-60)
+
+    self.ball.x = VIRTUAL_WIDTH / 2 - 4
+    self.ball.y = VIRTUAL_HEIGHT - 42
 end
 
 function PlayState:update(dt)
@@ -37,8 +46,16 @@ function PlayState:update(dt)
         return
     end
 
-    -- Updates paddle position
+    -- Updates paddle and ball position
     self.paddle:update(dt)
+    self.ball:update(dt)
+
+    -- Checks collision between ball and paddle
+    if self.ball:collides(self.paddle) then
+        -- The ball bounces off paddle
+        self.ball.dy = -self.ball.dy
+        gSounds["paddle-hit"]:play()
+    end
 
     if love.keyboard.wasPressed("escape") then
         love.event.quit()
@@ -46,7 +63,9 @@ function PlayState:update(dt)
 end
 
 function PlayState:render()
+    -- Renders the objects
     self.paddle:render()
+    self.ball:render()
 
     -- Pause text
     if self.paused then

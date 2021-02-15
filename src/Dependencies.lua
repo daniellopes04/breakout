@@ -23,6 +23,7 @@ require "src/constants"
 -- Game classes
 require "src/Util"
 require "src/Paddle"
+require "src/Ball"
 
 -- State machine and the game states
 require "src/StateMachine"
