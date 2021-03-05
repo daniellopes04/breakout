@@ -13,7 +13,7 @@
 
 Paddle = Class{}
 
-function Paddle:init()
+function Paddle:init(skin)
     -- Initializes x and y to place the paddle on the lower middle of screen
     self.x = VIRTUAL_WIDTH / 2 - 32
     self.y = VIRTUAL_HEIGHT - 32
@@ -26,7 +26,7 @@ function Paddle:init()
     self.height = 16
 
     -- Paddle color
-    self.skin = 1
+    self.skin = skin
 
     -- Starts with medium paddle size
     self.size = 2
