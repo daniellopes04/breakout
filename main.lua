@@ -13,6 +13,9 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setTitle("Breakout")
 
+    -- Seed the random number generator function
+    love.math.setRandomSeed(os.time())
+
     -- Loads the fonts used in the game
     gFonts = {
         ["small"] = love.graphics.newFont("fonts/font.ttf", 8),

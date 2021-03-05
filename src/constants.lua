@@ -19,6 +19,3 @@ VIRTUAL_HEIGHT = 243
 
 -- Paddle movement speed
 PADDLE_SPEED = 200
-
--- Seed the random number generator function
-love.math.setRandomSeed(os.time())
