@@ -21,11 +21,11 @@ function StartState:update(dt)
     end
 
     -- If enter is pressed, proceeds to state
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed('return') then
         gSounds['confirm']:play()
 
         if highlighted == 1 then
-            gStateMachine:change('serve', {
+            gStateMachine:change("serve", {
                 paddle = Paddle(1),
                 bricks = LevelMaker.createMap(),
                 health = 3,

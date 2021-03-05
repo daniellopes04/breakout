@@ -13,9 +13,6 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setTitle("Breakout")
 
-    -- Seed the random number generator function
-    love.math.setRandomSeed(os.time())
-
     -- Loads the fonts used in the game
     gFonts = {
         ["small"] = love.graphics.newFont("fonts/font.ttf", 8),
@@ -57,7 +54,7 @@ function love.load()
         ["paddles"] = GenerateQuadsPaddles(gTextures["main"]),
         ["balls"] = GenerateQuadsBalls(gTextures["main"]),
         ["bricks"] = GenerateQuadsBricks(gTextures["main"]),
-        ["hearts"] = GenerateQuads(gTextures["main"], 10, 9)
+        ["hearts"] = GenerateQuads(gTextures["hearts"], 10, 9)
     }
 
     -- Setting up the screen
@@ -71,7 +68,8 @@ function love.load()
     gStateMachine = StateMachine {
         ["start"] = function() return StartState() end,
         ["play"] = function() return PlayState() end,
-        ["serve"] = function() return PlayState() end,
+        ["serve"] = function() return ServeState() end,
+        ["game-over"] = function() return GameOverState() end
     }
     gStateMachine:change("start")
 
@@ -133,13 +131,13 @@ function renderHealth(health)
 
     -- Render health left
     for i = 1, health do
-        love.graphics.draw(gTextures["hearts"], gFrames["health"][1], healthX, 4)
+        love.graphics.draw(gTextures["hearts"], gFrames["hearts"][1], healthX, 4)
         healthX = healthX + 11
     end
 
     -- Render missing health
     for i = 1, 3 - health do
-        love.graphics.draw(gTextures["hearts"], gFrames["health"][2], healthX, 4)
+        love.graphics.draw(gTextures["hearts"], gFrames["hearts"][2], healthX, 4)
         healthX = healthX + 11
     end
 end
