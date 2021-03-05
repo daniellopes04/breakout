@@ -2,7 +2,7 @@
     Part of "S50's Intro to Game Development"
     Lecture 2
     
-    -- BaseState Class --
+    -- StartState Class --
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
     
@@ -25,7 +25,12 @@ function StartState:update(dt)
         gSounds['confirm']:play()
 
         if highlighted == 1 then
-            gStateMachine:change('play')
+            gStateMachine:change('serve', {
+                paddle = Paddle(1),
+                bricks = LevelMaker.createMap(),
+                health = 3,
+                score = 0
+            })
         else
             --gStateMachine:change('high-scores')
         end
