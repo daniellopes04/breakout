@@ -58,11 +58,11 @@ function PlayState:update(dt)
         -- We want to tweak the angle of dx a little, based on where the ball hits the paddle
         -- If we hit the paddle on its left side while moving left...
         if self.ball.x < self.paddle.x + (self.paddle.width / 2) and self.paddle.x < 0 then
-            self.ball.dx = -5 + -(8 * (self.paddle.x + self.paddle.width / 2) - self.ball.x)
+            self.ball.dx = -50 + -(2 * (self.paddle.x + self.paddle.width / 2) - self.ball.x)
 
         -- If we hit the paddle on its right side while moving right...
         elseif self.ball.x > self.paddle.x + (self.paddle.width / 2) and self.paddle.x > 0 then
-            self.ball.dx = 5 + (8 * math.abs(self.paddle.x + self.paddle.width / 2) - self.ball.x)
+            self.ball.dx = 50 + (2 * math.abs(self.paddle.x + self.paddle.width / 2) - self.ball.x)
         end
 
         gSounds["paddle-hit"]:play()
@@ -134,6 +134,11 @@ function PlayState:update(dt)
         end
     end
 
+    -- For rendering particle systems
+    for k, brick in pairs(self.bricks) do
+        brick:update(dt)
+    end
+
     if love.keyboard.wasPressed("escape") then
         love.event.quit()
     end
@@ -144,16 +149,23 @@ function PlayState:render()
     self.paddle:render()
     self.ball:render()
 
+    -- Renders all bricks
     for k, brick in pairs(self.bricks) do
         brick:render()
     end
 
+    -- Renders all particle systems
+    for k, brick in pairs(self.bricks) do
+        brick:renderParticles()
+    end
+    
+    -- Renders score and health
     renderScore(self.score)
     renderHealth(self.health)
 
     -- Pause text
     if self.paused then
         love.graphics.setFont(gFonts["large"])
-        love.graphics.printf("PAUSED", 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH / 2 - 16)
+        love.graphics.printf("PAUSED", 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, "center")
     end
 end
