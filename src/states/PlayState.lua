@@ -58,11 +58,11 @@ function PlayState:update(dt)
         -- We want to tweak the angle of dx a little, based on where the ball hits the paddle
         -- If we hit the paddle on its left side while moving left...
         if self.ball.x < self.paddle.x + (self.paddle.width / 2) and self.paddle.x < 0 then
-            self.ball.dx = -50 + -(8 * (self.paddle.x + self.paddle.width / 2) - self.ball.x)
+            self.ball.dx = -5 + -(8 * (self.paddle.x + self.paddle.width / 2) - self.ball.x)
 
         -- If we hit the paddle on its right side while moving right...
         elseif self.ball.x > self.paddle.x + (self.paddle.width / 2) and self.paddle.x > 0 then
-            self.ball.dx = 50 + (8 * math.abs(self.paddle.x + self.paddle.width / 2) - self.ball.x)
+            self.ball.dx = 5 + (8 * math.abs(self.paddle.x + self.paddle.width / 2) - self.ball.x)
         end
 
         gSounds["paddle-hit"]:play()
@@ -73,7 +73,7 @@ function PlayState:update(dt)
         -- Only checks brick if it is in play
         if brick.inPlay and self.ball:collides(brick) then
             -- Add to score
-            self.score = self.score + 10
+            self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
             -- Takes brick out of play
             brick:hit()

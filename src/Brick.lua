@@ -30,10 +30,33 @@ function Brick:init(x, y)
 end
 
 function Brick:hit()
+    gSounds["brick-hit-2"]:stop()
     gSounds["brick-hit-2"]:play()
 
-    -- If the brick is hit, it should dissapear from screen
-    self.inPlay = false
+    -- We cycle through the colors when the brick is hit
+    -- Once the cycle is complete, we go down a tier
+    -- When we reach the lowest tier and lowest color, the brick is removed
+    if self.tier > 0 then
+        if self.color == 1 then
+            self.tier = self.tier - 1
+            self.color = 5
+        else
+            self.color = self.color - 1
+        end
+    else
+        -- If we're in the first tier and the base color, remove brick
+        if self.color == 1 then
+            self.inPlay = false
+        else
+            self.color = self.color - 1
+        end
+    end
+
+    -- Second layer of sound if the brick is destroyed
+    if not self.inPlay then
+        gSounds["brick-hit-1"]:stop()
+        gSounds["brick-hit-1"]:play()
+    end
 end
 
 function Brick:render()
