@@ -14,7 +14,7 @@ function love.load()
     love.window.setTitle("Breakout")
 
     -- Seed the random number generator function
-    love.math.setRandomSeed(os.time())
+    math.randomseed(os.time())
 
     -- Loads the fonts used in the game
     gFonts = {
