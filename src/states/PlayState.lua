@@ -83,8 +83,6 @@ function PlayState:update(dt)
 
             -- If the player has enough points, recover a point of health
             if self.score > self.recoverPoints then
-                recover = true
-
                 -- Can't go above 3 hearts
                 self.health = math.min(3, self.health + 1)
 
