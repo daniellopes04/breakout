@@ -83,6 +83,10 @@ function love.load()
         highScores = loadHighScores()
     })
 
+    -- Play game music
+    gSounds['music']:play()
+    gSounds['music']:setLooping(true)
+
     -- Keeps track of the keys pressed by the user
     love.keyboard.keysPressed = {}
 end
