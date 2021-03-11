@@ -2,21 +2,21 @@
     Part of "S50's Intro to Game Development"
     Lecture 2
     
-    -- HighScoreState Class --
+    -- HighScoresState Class --
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
     
     The state that shows a screen where we can view all high scores previously recorded.
 ]]
 
-HighScoreState = Class{__includes = BaseState}
+HighScoresState = Class{__includes = BaseState}
 
-function HighScoreState:enter(params)
+function HighScoresState:enter(params)
     -- Grab the game state passed in params
     self.highScores = params.highScores
 end
 
-function HighScoreState:update(dt)
+function HighScoresState:update(dt)
     -- Return to start screen
     if love.keyboard.wasPressed("escape") then
         gSounds["wall-hit"]:play()
@@ -27,7 +27,7 @@ function HighScoreState:update(dt)
     end
 end
 
-function HighScoreState:render()
+function HighScoresState:render()
     love.graphics.setFont(gFonts["large"])
     love.graphics.printf("High Scores", 0, 20, VIRTUAL_WIDTH, "center")
 
