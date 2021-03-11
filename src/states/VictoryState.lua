@@ -21,6 +21,7 @@ function VictoryState:enter(params)
     self.ball = params.ball
     self.level = params.level
     self.highScores = params.highScores
+    self.recoverPoints = params.recoverPoints
 end
 
 function VictoryState:update(dt)
@@ -38,7 +39,8 @@ function VictoryState:update(dt)
             health = self.health,
             score = self.score,
             level = self.level + 1,
-            highScores = self.highScores
+            highScores = self.highScores,
+            recoverPoints = self.recoverPoints
         })
     end
 

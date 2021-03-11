@@ -24,6 +24,7 @@ function PlayState:enter(params)
     self.ball = params.ball
     self.level = params.level
     self.highScores = params.highScores
+    self.recoverPoints = params.recoverPoints
 
     -- Initialize the ball velocity
     self.ball.dx = math.random(-200, 200)
@@ -80,6 +81,19 @@ function PlayState:update(dt)
             -- Takes brick out of play
             brick:hit()
 
+            -- If the player has enough points, recover a point of health
+            if self.score > self.recoverPoints then
+                recover = true
+
+                -- Can't go above 3 hearts
+                self.health = math.min(3, self.health + 1)
+
+                -- Multiply points to recover by 2, with 100.000 limit
+                self.recoverPoints = math.min(100000, self.recoverPoints * 2)
+
+                gSounds["recover"]:play()
+            end
+
             -- Go to victory screen if the player cleared all the bricks
             if self:checkVictory() then
                 gSounds["victory"]:play()
@@ -91,7 +105,8 @@ function PlayState:update(dt)
                     score = self.score,
                     ball = self.ball,
                     level = self.level,
-                    highScores = self.highScores
+                    highScores = self.highScores,
+                    recoverPoints = self.recoverPoints
                 })
             end
 
@@ -149,7 +164,8 @@ function PlayState:update(dt)
                 health = self.health,
                 score = self.score,
                 level = self.level,
-                highScores = self.highScores
+                highScores = self.highScores,
+                recoverPoints = self.recoverPoints
             })
         end
     end
