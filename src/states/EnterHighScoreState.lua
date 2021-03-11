@@ -65,16 +65,20 @@ function EnterHighScoreState:update(dt)
     end
 
     -- Scroll through character slots
-    if love.keyboard.wasPressed("left") and highlightedChar > 1 then
+    if love.keyboard.wasPressed("left") then
+        if highlightedChar > 1 then
         highlightedChar = highlightedChar - 1
         gSounds["select"]:play()
-    elseif love.keyboard.wasPressed("left") and highlightedChar < 1 then
-        gSounds["no-select"]:play()
-    elseif love.keyboard.wasPressed("right") and highlightedChar < 3 then
+        else
+            gSounds["no-select"]:play()
+        end
+    elseif love.keyboard.wasPressed("right") then
+        if highlightedChar < 3 then
         highlightedChar = highlightedChar + 1
         gSounds["select"]:play()
-    elseif love.keyboard.wasPressed("right") and highlightedChar > 3 then
-        gSounds["no-select"]:play()
+        else
+            gSounds["no-select"]:play()
+        end
     end
 
     -- Scroll through characters
