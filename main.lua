@@ -73,9 +73,12 @@ function love.load()
         ["play"] = function() return PlayState() end,
         ["serve"] = function() return ServeState() end,
         ["game-over"] = function() return GameOverState() end,
-        ["victory"] = function() return VictoryState() end
+        ["victory"] = function() return VictoryState() end,
+        ["high-scores"] = function() return HighScoreState() end
     }
-    gStateMachine:change("start")
+    gStateMachine:change("start", {
+        highScores = loadHighScores()
+    })
 
     -- Keeps track of the keys pressed by the user
     love.keyboard.keysPressed = {}
@@ -151,4 +154,50 @@ function renderScore(score)
     love.graphics.setFont(gFonts["small"])
     love.graphics.print("Score:", VIRTUAL_WIDTH - 60, 5)
     love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 50, 5, 40, "right")
+end
+
+-- Loads high scores from a .lst file, saved in default save directory in a subfolder called "breakout"
+function loadHighScores()
+    love.filesystem.setIdentity("breakout")
+
+    -- If file doesn't exist, initialize with default scores
+    if not love.filesystem.getInfo("breakout.lst") then
+        local scores = ""
+        for i = 10, 1, -1 do
+            scores = scores .. "DAN\n"
+            scores = scores .. tostring(0) .. "\n"
+        end
+
+        love.filesystem.write("breakout.lst", scores)
+    end
+
+    -- Flag for whether we are reading a name or not
+    local name = true
+    local currentName = nil
+    local counter = 1
+
+    -- Initialize scores table with 10 entries, each will hold a name and a score
+    local scores = {}
+
+    for i = 1, 10 do
+        scores[i] = {
+            name = nil,
+            score = nil
+        }
+    end
+
+    -- Iterate over each line in file, filling in names and scores
+    for line in love.filesystem.lines("breakout.lst") do 
+        if name then
+            scores[counter].name = string.sub(line, 1, 3)
+        else
+            scores[counter].score = tonumber(line)
+            counter = counter + 1
+        end
+
+        -- Flip name flag
+        name = not name
+    end
+
+    return scores
 end
