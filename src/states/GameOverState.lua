@@ -25,7 +25,7 @@ function GameOverState:update(dt)
         local highScore = false
 
         -- This is the index our high score will overwrite if it does
-        local highcoreIndex = 11
+        local highScoreIndex = 11
 
         for i = 10, 1, -1 do
             local score = self.highScores[i].score or 0
