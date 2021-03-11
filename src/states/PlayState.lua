@@ -22,6 +22,7 @@ function PlayState:enter(params)
     self.health = params.health
     self.score = params.score
     self.ball = params.ball
+    self.level = params.level
 
     -- Initialize the ball velocity
     self.ball.dx = math.random(-200, 200)
@@ -78,6 +79,20 @@ function PlayState:update(dt)
             -- Takes brick out of play
             brick:hit()
 
+            -- Go to victory screen if the player cleared all the bricks
+            if self:checkVictory() then
+                gSounds["victory"]:play()
+
+                gStateMachine:change("victory", {
+                    paddle = self.paddle,
+                    bricks = self.bricks,
+                    health = self.health,
+                    score = self.score,
+                    ball = self.ball,
+                    level = self.level
+                })
+            end
+
             -- Collision for bricks
             -- We check to see if the opposite side of our velocity is outside of the brick.
             -- Then we flip it and reset position outside of brick
@@ -130,6 +145,7 @@ function PlayState:update(dt)
                 bricks = self.bricks,
                 health = self.health,
                 score = self.score,
+                level = self.level
             })
         end
     end
@@ -168,4 +184,15 @@ function PlayState:render()
         love.graphics.setFont(gFonts["large"])
         love.graphics.printf("PAUSED", 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, "center")
     end
+end
+
+-- Checks if the player cleared all the bricks
+function PlayState:checkVictory()
+    for k, brick in pairs(self.bricks) do
+        if brick.inPlay then
+            return false
+        end
+    end
+
+    return true
 end

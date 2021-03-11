@@ -2,30 +2,28 @@
     Part of "S50's Intro to Game Development"
     Lecture 2
     
-    -- ServeState Class --
+    -- VictoryState Class --
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
     
-    The state for when we are waiting to serve the ball.
+    Represents the state that the game is in when we've just completed a level.
+    Very similar to the ServeState, except here we increment the level.
 ]]
 
-ServeState = Class{__includes = BaseState}
+VictoryState = Class{__includes = BaseState}
 
-function ServeState:enter(params)
+function VictoryState:enter(params)
     -- Grab the game state passed in params
     self.paddle = params.paddle
     self.bricks = params.bricks
     self.health = params.health
     self.score = params.score
+    self.ball = params.ball
     self.level = params.level
-
-    -- Initialize new ball with random color
-    self.ball = Ball()
-    self.ball.skin = math.random(7)
 end
 
-function ServeState:update(dt)
-    -- The ball moves with the paddle, until game starts
+function VictoryState:update(dt)
+    -- The ball moves with the paddle, until game starts again
     self.paddle:update(dt)
     self.ball.x = self.paddle.x + (self.paddle.width / 2) - 4
     self.ball.y = self.paddle.y - 8
@@ -33,13 +31,12 @@ function ServeState:update(dt)
     -- The player starts the game
     if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed("return") then
         -- Pass the current state
-        gStateMachine:change("play", {
+        gStateMachine:change("serve", {
             paddle = self.paddle,
-            bricks = self.bricks,
+            bricks = LevelMaker.createMap(self.level + 1),
             health = self.health,
             score = self.score,
-            ball = self.ball,
-            level = self.level
+            level = self.level + 1
         })
     end
 
@@ -48,18 +45,20 @@ function ServeState:update(dt)
     end
 end
 
-function ServeState:render()
+function VictoryState:render()
     self.ball:render()
     self.paddle:render()
-
-    for k, brick in pairs(self.bricks) do
-        brick:render()
-    end
 
     renderScore(self.score)
     renderHealth(self.health)
 
+    -- Level complete
+    love.graphics.setFont(gFonts["large"])
+    love.graphics.printf("Level " .. tostring(self.level) .. " complete!", 0, VIRTUAL_HEIGHT / 4,
+        VIRTUAL_WIDTH, "center")
+
+    -- Instructions
     love.graphics.setFont(gFonts["medium"])
-    love.graphics.printf("Press Enter to serve!", 0, VIRTUAL_HEIGHT / 2,
+    love.graphics.printf("Press Enter to next level!", 0, VIRTUAL_HEIGHT / 2,
         VIRTUAL_WIDTH, "center")
 end
