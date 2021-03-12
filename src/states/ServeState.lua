@@ -22,15 +22,14 @@ function ServeState:enter(params)
     self.recoverPoints = params.recoverPoints
 
     -- Initialize new ball with random color
-    self.ball = Ball()
-    self.ball.skin = math.random(7)
+    self.balls = {}
+    table.insert(self.balls, Ball(math.random(7)))
 end
 
 function ServeState:update(dt)
     -- The ball moves with the paddle, until game starts
     self.paddle:update(dt)
-    self.ball.x = self.paddle.x + (self.paddle.width / 2) - 4
-    self.ball.y = self.paddle.y - 8
+    self.balls[1]:resetToPaddle(self.paddle)
 
     -- The player starts the game
     if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed("return") then
@@ -40,7 +39,7 @@ function ServeState:update(dt)
             bricks = self.bricks,
             health = self.health,
             score = self.score,
-            ball = self.ball,
+            balls = self.balls,
             level = self.level,
             highScores = self.highScores,
             recoverPoints = self.recoverPoints
@@ -53,8 +52,8 @@ function ServeState:update(dt)
 end
 
 function ServeState:render()
-    self.ball:render()
     self.paddle:render()
+    self.balls[1]:render()
 
     for k, brick in pairs(self.bricks) do
         brick:render()

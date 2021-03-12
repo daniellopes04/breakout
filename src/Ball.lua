@@ -40,12 +40,9 @@ function Ball:collides(target)
     return true
 end
 
-function Ball:reset()
-    -- Resets the ball to the middle of screen
-    self.x = VIRTUAL_WIDTH / 2 - 2
-    self.y = VIRTUAL_HEIGHT / 2 - 2
-    self.dx = 0 
-    self.dy = 0 
+function Ball:resetToPaddle(paddle)
+    self.x = paddle.x + (paddle.width / 2) - 4
+    self.y = paddle.y - 8
 end
 
 function Ball:update(dt)

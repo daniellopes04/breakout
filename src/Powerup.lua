@@ -39,6 +39,9 @@ function Powerup:init(type)
     -- Coordinates where the powerup will spawn
     self.x = math.random(0, VIRTUAL_WIDTH)
     self.y = -1
+
+    -- Defines if the powerup is in game or not
+    self.inPlay = false
 end
 
 function Powerup:collides(target)
@@ -61,6 +64,10 @@ function Powerup:update(dt)
     self.y = self.y + self.dy * dt
 
     self.dy = self.dy + self.y * dt
+
+    if self.y >= VIRTUAL_HEIGHT then
+        self.inPlay = false
+    end
 end
 
 function Powerup:render()
