@@ -29,6 +29,13 @@ function PlayState:enter(params)
     -- Initialize the ball velocity
     self.ball.dx = math.random(-200, 200)
     self.ball.dy = math.random(-50,-60)
+
+    -- Initialize our powerups table
+    self.powerups = {}
+
+    -- Timer and time limit for a powerup to spawn
+    self.timer = 0
+    self.timeLimit = 1
 end
 
 function PlayState:update(dt)
@@ -49,6 +56,14 @@ function PlayState:update(dt)
     -- Updates paddle and ball position
     self.paddle:update(dt)
     self.ball:update(dt)
+
+    -- Generates random powerups at a interval of time
+    self.timer = self.timer + dt
+    if self.timer >= self.timeLimit then
+        table.insert(self.powerups, Powerup(math.abs(math.random(1,10))))
+        self.timer = 0
+        self.timeLimit = self.timeLimit + self.timeLimit * 2 * dt
+    end
 
     -- Checks collision between ball and paddle
     if self.ball:collides(self.paddle) then
@@ -173,6 +188,11 @@ function PlayState:update(dt)
         brick:update(dt)
     end
 
+    -- For powerups
+    for k, powerup in pairs(self.powerups) do
+        powerup:update(dt)
+    end
+
     if love.keyboard.wasPressed("escape") then
         love.event.quit()
     end
@@ -191,6 +211,11 @@ function PlayState:render()
     -- Renders all particle systems
     for k, brick in pairs(self.bricks) do
         brick:renderParticles()
+    end
+
+    -- For powerups
+    for k, powerup in pairs(self.powerups) do
+        powerup:render()
     end
     
     -- Renders score and health

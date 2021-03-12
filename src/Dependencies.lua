@@ -26,6 +26,7 @@ require "src/Paddle"
 require "src/Ball"
 require "src/Brick"
 require "src/LevelMaker"
+require "src/Powerup"
 
 -- State machine and the game states
 require "src/StateMachine"
