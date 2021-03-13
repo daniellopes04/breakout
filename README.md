@@ -5,12 +5,15 @@ Implementation of retro game ["Breakout"](https://en.wikipedia.org/wiki/Breakout
 
 ## Objectives
 
-- [ ] Implement a version from the game Breakout.
-- [ ] Add a powerup to the game that spawns two extra Balls.
-- [ ] Grow and shrink the Paddle when the player gains enough points or loses a life.
+- [x] Implement a version from the game Breakout.
+- [x] Add a powerup to the game that spawns two extra Balls.
+- [x] Grow and shrink the Paddle when the player gains enough points or loses a life.
 - [ ] Add a locked Brick that will only open when the player collects a second new powerup, a key, which should only spawn when such a Brick exists and randomly as per the Ball powerup.
+- [ ] Add extra powerups to the game.
 
 ## Possible updates
+
+- [ ] Show visual response to when the player gets a powerup.
 
 ## Installation
 
@@ -33,3 +36,24 @@ love .
 Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) and download the version compatible with your system.
 
 ## The game
+
+### Controls
+
+* Left and right arrows to control the paddle
+
+### In-game powerups 
+
+1. Gain extra heart
+2. Adds 5 extra balls to the game
+3. Increase paddle size
+4. 1000 extra points
+5. All balls in game inflict 2x damage
+6. All balls in game inflict critic damage
+7. Adds two extra balls to the game
+8. Enables to break a locked brick
+
+### High-score feature
+
+The game stores all the player's high scores.
+
+
