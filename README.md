@@ -45,7 +45,6 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 * Left and right arrows to control the paddle
 
 ![Screen3](https://github.com/daniellopes04/breakout/blob/main/graphics/print3.png)
-
 ![Screen4](https://github.com/daniellopes04/breakout/blob/main/graphics/print4.png)
 
 ### In-game powerups 
@@ -60,15 +59,12 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 8. Enables to break a locked brick
 
 ![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
-
 ![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)
-
 ![Screen7](https://github.com/daniellopes04/breakout/blob/main/graphics/print7.png)
 
 ### High-score feature
 
 The game stores all the player's high scores.
 
-![Screen2](https://github.com/daniellopes04/breakout/blob/main/graphics/print2.png)
-
 ![Screen8](https://github.com/daniellopes04/breakout/blob/main/graphics/print8.png)
+![Screen2](https://github.com/daniellopes04/breakout/blob/main/graphics/print2.png)
