@@ -10,16 +10,14 @@
     and the effects depend on the type. The powerup will take effect when the paddle collides with it.
 
     Powerup types:
-        1 - 
-        2 - 
-        3 - Gain extra heart
-        4 - 
-        5 - 
-        6 - 
-        7 - 
-        8 - 
-        9 - Adds two extra balls to the game
-        10 - 
+        1 - Gain extra heart
+        2 - Adds 5 extra balls to the game
+        3 - Increase paddle size
+        4 - 1000 extra points
+        5 - All balls in game inflict 2x damage
+        6 - All balls in game inflict critic damage
+        7 - Adds two extra balls to the game
+        8 - Enables to break a locked brick
 ]]
 
 Powerup = Class{}

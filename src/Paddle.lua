@@ -54,3 +54,12 @@ function Paddle:render()
     love.graphics.draw(gTextures["main"], gFrames["paddles"][self.size + 4 * (self.skin - 1)],
         self.x, self.y)
 end
+
+function Paddle:updateSize(rate)
+    if (rate < 0 and self.size > 1) or (rate >= 1 and self.size < 4) then
+        self.size = self.size + rate
+        self.width = self.width + 32 * rate
+
+        self.x = self.x - 16 * rate
+    end
+end

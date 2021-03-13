@@ -57,7 +57,7 @@ function PlayState:update(dt)
     self.timer = self.timer + dt
 
     if self.timer >= self.timeLimit then
-        table.insert(self.powerups, Powerup(math.random(10)))
+        table.insert(self.powerups, Powerup(math.random(8)))
 
         self.timer = 0
         self.timeLimit = self.timeLimit + self.timeLimit * dt 
@@ -69,41 +69,30 @@ function PlayState:update(dt)
         -- Checks for collision between powerup and paddle
         if powerup:collides(self.paddle) then
             if powerup.type == 1 then
-            elseif powerup.type == 2 then
-
-            elseif powerup.type == 3 then
+                -- Increase one life
                 self.health = math.min(3, self.health + 1)
 
+            elseif powerup.type == 2 then
+                -- Inserts five new balls in table
+                self:insertBalls(5)
+
+            elseif powerup.type == 3 then
+                -- Increase paddle size
+                self.paddle:updateSize(1)
+
             elseif powerup.type == 4 then
+                -- 1000 extra points
+                self.score = self.score + 1000
 
             elseif powerup.type == 5 then
 
             elseif powerup.type == 6 then
 
             elseif powerup.type == 7 then
+                -- Inserts two new balls in table
+                self:insertBalls(2)
 
             elseif powerup.type == 8 then
-
-            elseif powerup.type == 9 then
-                -- Inserts two new balls in table
-                table.insert(self.balls, Ball(math.random(7)))
-                table.insert(self.balls, Ball(math.random(7)))
-                
-                -- Gets the size of table with two new balls
-                local n = table.getn(self.balls)
-                
-                -- Sets the extra balls initial positions and random velocity
-                self.balls[n].x = self.paddle.x + (self.paddle.width / 2) - 4
-                self.balls[n].y = self.paddle.y - 8
-                self.balls[n].dx = math.random(-200, 200)
-                self.balls[n].dy = math.random(-50,-60)
-
-                self.balls[n-1].x = self.paddle.x + (self.paddle.width / 2) - 4
-                self.balls[n-1].y = self.paddle.y - 8
-                self.balls[n-1].dx = math.random(-200, 200)
-                self.balls[n-1].dy = math.random(-50,-60)
-
-            elseif powerup.type == 10 then
             end
             gSounds["confirm"]:play()
 
@@ -160,10 +149,7 @@ function PlayState:update(dt)
 
                     -- Increase paddle size when player gets enough points
                     if self.paddle.size < 4 then
-                        self.paddle.size = self.paddle.size + 1
-                        self.paddle.width = self.paddle.width + 32
-
-                        self.paddle.x = self.paddle.x - 16
+                        self.paddle:updateSize(1)
                     end
 
                     -- Multiply points to recover by 2, with 100.000 limit
@@ -231,12 +217,7 @@ function PlayState:update(dt)
         gSounds["hurt"]:play()
 
         -- Decrease paddle size when player loses a life
-        if self.paddle.size > 1 then
-            self.paddle.size = self.paddle.size - 1
-            self.paddle.width = self.paddle.width - 32
-
-            self.paddle.x = self.paddle.x + 16
-        end
+        self.paddle:updateSize(-1)
 
         -- If health runs out then game over and if not, serve again
         if self.health == 0 then
@@ -319,6 +300,22 @@ function PlayState:checkVictory()
     end
 
     return true
+end
+
+function PlayState:insertBalls(n)
+    for i = 1, n do
+        -- Inserts two new balls in table
+        table.insert(self.balls, Ball(math.random(7)))
+        
+        -- Gets the size of table with two new balls
+        local size = table.getn(self.balls)
+        
+        -- Sets the extra balls initial positions and random velocity
+        self.balls[size].x = self.paddle.x + (self.paddle.width / 2) - 4
+        self.balls[size].y = self.paddle.y - 8
+        self.balls[size].dx = math.random(-200, 200)
+        self.balls[size].dy = math.random(-50,-60)
+    end
 end
 
 -- Checks if all the balls have gone below the paddle
