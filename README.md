@@ -71,4 +71,4 @@ The game stores all the player's high scores.
 
 ![Screen2](https://github.com/daniellopes04/breakout/blob/main/graphics/print2.png)
 
-
+![Screen8](https://github.com/daniellopes04/breakout/blob/main/graphics/print8.png)
