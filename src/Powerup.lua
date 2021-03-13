@@ -12,7 +12,7 @@
     Powerup types:
         1 - 
         2 - 
-        3 - 
+        3 - Gain extra heart
         4 - 
         5 - 
         6 - 
@@ -41,7 +41,7 @@ function Powerup:init(type)
     self.y = -1
 
     -- Defines if the powerup is in game or not
-    self.inPlay = false
+    -- self.inPlay = false
 end
 
 function Powerup:collides(target)
@@ -64,10 +64,6 @@ function Powerup:update(dt)
     self.y = self.y + self.dy * dt
 
     self.dy = self.dy + self.y * dt
-
-    if self.y >= VIRTUAL_HEIGHT then
-        self.inPlay = false
-    end
 end
 
 function Powerup:render()

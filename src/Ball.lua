@@ -40,11 +40,6 @@ function Ball:collides(target)
     return true
 end
 
-function Ball:resetToPaddle(paddle)
-    self.x = paddle.x + (paddle.width / 2) - 4
-    self.y = paddle.y - 8
-end
-
 function Ball:update(dt)
     -- Update ball position
     self.x = self.x + self.dx * dt

@@ -29,7 +29,8 @@ end
 function ServeState:update(dt)
     -- The ball moves with the paddle, until game starts
     self.paddle:update(dt)
-    self.balls[1]:resetToPaddle(self.paddle)
+    self.balls[1].x = self.paddle.x + (self.paddle.width / 2) - 4
+    self.balls[1].y = self.paddle.y - 8
 
     -- The player starts the game
     if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed("return") then

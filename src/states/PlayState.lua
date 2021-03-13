@@ -31,13 +31,11 @@ function PlayState:enter(params)
     self.balls[1].dy = math.random(-50,-60)
 
     -- Initialize our powerups table
-    self.powerup = Powerup(math.abs(math.random(10)))
+    self.powerups = {}
 
     -- Timer and time limit for a powerup to spawn
-    --self.timer = 0
-    --self.timeLimit = 5
-
-    self.hitCounter = 0
+    self.timer = 0
+    self.timeLimit = 1
 end
 
 function PlayState:update(dt)
@@ -56,29 +54,58 @@ function PlayState:update(dt)
     end
 
     -- Generates random powerups at a interval of time
-    --self.timer = self.timer + dt
+    self.timer = self.timer + dt
 
-    if self.hitCounter == 1 and self.powerup.inPlay == false then
-        --self.powerup = Powerup(math.abs(math.random(10)))
-        self.powerup = Powerup(9)
-        self.powerup.inPlay = true
-        --self.timer = 0
-        --self.timeLimit = self.timeLimit + self.timeLimit * dt
-        self.hitCounter = 0
+    if self.timer >= self.timeLimit then
+        table.insert(self.powerups, Powerup(9))
+        self.timer = 0
+        self.timeLimit = self.timeLimit + self.timeLimit * dt
     end
 
-    -- Checks for collision between powerup and paddle
-    if self.powerup:collides(self.paddle) and self.powerup.inPlay == true then
-        if self.powerup.type == 9 then
-            table.insert(self.balls, Ball(math.random(7)))
-            local n = table.getn(self.balls)
-            self.balls[n]:resetToPaddle(self.paddle)
-            self.balls[n].dx = math.random(-200, 200)
-            self.balls[n].dy = math.random(-50,-60)
-        end
-        gSounds["confirm"]:play()
+    for k, powerup in pairs(self.powerups) do
+        -- Checks for collision between powerup and paddle
+        if powerup:collides(self.paddle) then
+            if powerup.type == 1 then
+            elseif powerup.type == 2 then
 
-        self.powerup.inPlay = false
+            elseif powerup.type == 3 then
+                self.health = math.min(3, self.health + 1)
+
+            elseif powerup.type == 4 then
+
+            elseif powerup.type == 5 then
+
+            elseif powerup.type == 6 then
+
+            elseif powerup.type == 7 then
+
+            elseif powerup.type == 8 then
+
+            elseif powerup.type == 9 then
+                -- Inserts two new balls in table
+                table.insert(self.balls, Ball(math.random(7)))
+                table.insert(self.balls, Ball(math.random(7)))
+                
+                -- Gets the size of table with two new balls
+                local n = table.getn(self.balls)
+                
+                -- Sets the extra balls initial positions and random velocity
+                self.balls[n].x = self.paddle.x + (self.paddle.width / 2) - 4
+                self.balls[n].y = self.paddle.y - 8
+                self.balls[n].dx = math.random(-200, 200)
+                self.balls[n].dy = math.random(-50,-60)
+
+                self.balls[n-1].x = self.paddle.x + (self.paddle.width / 2) - 4
+                self.balls[n-1].y = self.paddle.y - 8
+                self.balls[n-1].dx = math.random(-200, 200)
+                self.balls[n-1].dy = math.random(-50,-60)
+
+            elseif powerup.type == 10 then
+            end
+            gSounds["confirm"]:play()
+
+            table.remove(self.powerups, k)
+        end
     end
 
     -- Updates paddle and ball position
@@ -90,6 +117,10 @@ function PlayState:update(dt)
     -- Checks collision between ball and paddle
     for k, ball in pairs(self.balls) do
         if ball:collides(self.paddle) then
+            --- 
+            --- Tweaks angle of collision based on where the ball hits the paddle
+            ---
+
             -- In case the ball goes below the paddle, raise its y position a little
             ball.y = self.paddle.y - 8
 
@@ -116,9 +147,6 @@ function PlayState:update(dt)
                 -- Add to score
                 self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
-                -- Add to hit counter, to generate powerups
-                self.hitCounter = self.hitCounter + 1
-
                 -- Takes brick out of play
                 brick:hit()
 
@@ -142,7 +170,7 @@ function PlayState:update(dt)
                         bricks = self.bricks,
                         health = self.health,
                         score = self.score,
-                        balls = self.balls[1],
+                        ball = self.balls[1],
                         level = self.level,
                         highScores = self.highScores,
                         recoverPoints = self.recoverPoints
@@ -216,7 +244,12 @@ function PlayState:update(dt)
     end
 
     -- For updating powerup position
-    self.powerup:update(dt)
+    for k, powerup in pairs(self.powerups) do
+        powerup:update(dt)
+    end
+
+    -- Clean powerups that are no longer in play
+    self:checkPowerups()
 
     if love.keyboard.wasPressed("escape") then
         love.event.quit()
@@ -238,8 +271,8 @@ function PlayState:render()
     end
 
     -- Renders powerup
-    if self.powerup.inPlay then
-        self.powerup:render()
+    for k, powerup in pairs(self.powerups) do
+        powerup:render()
     end
 
     -- Renders balls
@@ -285,5 +318,14 @@ function PlayState:checkBalls()
         return true
     else
         return false
+    end
+end
+
+-- Checks if the powerups have gone below the paddle
+function PlayState:checkPowerups()
+    for k, powerup in pairs(self.powerups) do
+        if powerup.y >= VIRTUAL_HEIGHT then
+            table.remove(self.powerups, k)
+        end
     end
 end
