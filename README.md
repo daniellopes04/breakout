@@ -1,7 +1,10 @@
-# Breakout
+![Breakout](https://github.com/daniellopes04/breakout/blob/main/graphics/breakout-text.png)
+
 ***Lecture 2* on "S50's Intro to Game Development" course, available on [YouTube](https://www.youtube.com/playlist?list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkpzoz)**
  
 Implementation of retro game ["Breakout"](https://en.wikipedia.org/wiki/Breakout_(video_game)).
+
+![Screen1](https://github.com/daniellopes04/breakout/blob/main/graphics/print1.png)
 
 ## Objectives
 
@@ -41,6 +44,10 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 
 * Left and right arrows to control the paddle
 
+![Screen3](https://github.com/daniellopes04/breakout/blob/main/graphics/print3.png)
+
+![Screen4](https://github.com/daniellopes04/breakout/blob/main/graphics/print4.png)
+
 ### In-game powerups 
 
 1. Gain extra heart
@@ -52,8 +59,16 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 7. Adds two extra balls to the game
 8. Enables to break a locked brick
 
+![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
+
+![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)
+
+![Screen7](https://github.com/daniellopes04/breakout/blob/main/graphics/print7.png)
+
 ### High-score feature
 
 The game stores all the player's high scores.
+
+![Screen2](https://github.com/daniellopes04/breakout/blob/main/graphics/print2.png)
 
 
