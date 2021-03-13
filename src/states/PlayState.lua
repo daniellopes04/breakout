@@ -35,7 +35,7 @@ function PlayState:enter(params)
 
     -- Timer and time limit for a powerup to spawn
     self.timer = 0
-    self.timeLimit = 1
+    self.timeLimit = 5
 end
 
 function PlayState:update(dt)
@@ -57,11 +57,14 @@ function PlayState:update(dt)
     self.timer = self.timer + dt
 
     if self.timer >= self.timeLimit then
-        table.insert(self.powerups, Powerup(9))
+        table.insert(self.powerups, Powerup(math.random(10)))
+
         self.timer = 0
-        self.timeLimit = self.timeLimit + self.timeLimit * dt
+        self.timeLimit = self.timeLimit + self.timeLimit * dt 
+        - math.floor(self.score / self.recoverPoints * dt)
     end
 
+    -- Checks for collision between powerup and paddle and apllies its effect
     for k, powerup in pairs(self.powerups) do
         -- Checks for collision between powerup and paddle
         if powerup:collides(self.paddle) then
@@ -155,6 +158,14 @@ function PlayState:update(dt)
                     -- Can't go above 3 hearts
                     self.health = math.min(3, self.health + 1)
 
+                    -- Increase paddle size when player gets enough points
+                    if self.paddle.size < 4 then
+                        self.paddle.size = self.paddle.size + 1
+                        self.paddle.width = self.paddle.width + 32
+
+                        self.paddle.x = self.paddle.x - 16
+                    end
+
                     -- Multiply points to recover by 2, with 100.000 limit
                     self.recoverPoints = math.min(100000, self.recoverPoints * 2)
 
@@ -218,6 +229,14 @@ function PlayState:update(dt)
     if self:checkBalls() then
         self.health = self.health - 1
         gSounds["hurt"]:play()
+
+        -- Decrease paddle size when player loses a life
+        if self.paddle.size > 1 then
+            self.paddle.size = self.paddle.size - 1
+            self.paddle.width = self.paddle.width - 32
+
+            self.paddle.x = self.paddle.x + 16
+        end
 
         -- If health runs out then game over and if not, serve again
         if self.health == 0 then

@@ -37,7 +37,7 @@ function Powerup:init(type)
     self.type = type
 
     -- Coordinates where the powerup will spawn
-    self.x = math.random(0, VIRTUAL_WIDTH)
+    self.x = math.random(0, VIRTUAL_WIDTH - 16)
     self.y = -1
 
     -- Defines if the powerup is in game or not
