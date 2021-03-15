@@ -1,4 +1,4 @@
-![Breakout](https://github.com/daniellopes04/breakout/blob/main/graphics/breakout-text.png)
+![Breakout](https://github.com/daniellopes04/breakout/blob/main/graphics/breakout-text1.png)
 
 ***Lecture 2* on "S50's Intro to Game Development" course, available on [YouTube](https://www.youtube.com/playlist?list=PLWKjhJtqVAbluXJKKbCIb4xd7fcRkpzoz)**
  
