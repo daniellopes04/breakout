@@ -49,14 +49,16 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 
 ### In-game powerups 
 
-![PowerUp1](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup1.png) Gain extra heart
-![PowerUp2](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup2.png) Adds 5 extra balls to the game
-![PowerUp3](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup3.png) Increase paddle size
-![PowerUp4](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup4.png) 1000 extra points
-![PowerUp5](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup5.png) All balls in game inflict 2x damage
-![PowerUp6](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup6.png) All balls in game inflict critic damage
-![PowerUp7](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup7.png) Adds two extra balls to the game
-![PowerUp8](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup8.png) Enables to break a locked brick
+| Powerup                                                      | Effect                                  |
+|:------------------------------------------------------------:|-----------------------------------------|
+| <img src="graphics/powerup1.png" alt="PowerUp1" width="30"/> | Gain extra heart                        |
+| <img src="graphics/powerup2.png" alt="PowerUp2" width="30"/> | Adds 5 extra balls to the game          |
+| <img src="graphics/powerup3.png" alt="PowerUp3" width="30"/> | Increase paddle size                    |
+| <img src="graphics/powerup4.png" alt="PowerUp4" width="30"/> | 1000 extra points                       |
+| <img src="graphics/powerup5.png" alt="PowerUp5" width="30"/> | All balls in game inflict 2x damage     |
+| <img src="graphics/powerup6.png" alt="PowerUp6" width="30"/> | All balls in game inflict critic damage |
+| <img src="graphics/powerup7.png" alt="PowerUp7" width="30"/> | Adds two extra balls to the game        |
+| <img src="graphics/powerup8.png" alt="PowerUp8" width="30"/> | Enables to break a locked brick         |
 
 ![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
 ![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)
