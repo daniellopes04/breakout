@@ -43,6 +43,7 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 ### Controls
 
 * Left and right arrows to control the paddle
+* "Space" to pause the game
 
 ![Screen3](https://github.com/daniellopes04/breakout/blob/main/graphics/print3.png)
 ![Screen4](https://github.com/daniellopes04/breakout/blob/main/graphics/print4.png)
@@ -60,9 +61,12 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 | <img src="graphics/powerup7.png" alt="PowerUp7" width="30"/> | Adds two extra balls to the game        |
 | <img src="graphics/powerup8.png" alt="PowerUp8" width="30"/> | Enables to break a locked brick         |
 
-![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
 ![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)
 ![Screen7](https://github.com/daniellopes04/breakout/blob/main/graphics/print7.png)
+
+### Pause feature
+
+![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
 
 ### High-score feature
 
