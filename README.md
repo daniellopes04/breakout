@@ -50,7 +50,7 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 
 ### In-game powerups 
 
-There are several powerups to enhance game experience and help the player in progressing through the levels. The powerups implemented are listed below.
+There are several powerups to enhance game experience and help the player in progressing through the levels. Their effects are activated once the player "catches" the powerup with the paddle. The powerups implemented are listed below.
 
 | Powerup                                                      | Effect                                  |
 |:------------------------------------------------------------:|-----------------------------------------|
