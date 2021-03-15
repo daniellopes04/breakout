@@ -49,14 +49,14 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 
 ### In-game powerups 
 
-1. Gain extra heart
-2. Adds 5 extra balls to the game
-3. Increase paddle size
-4. 1000 extra points
-5. All balls in game inflict 2x damage
-6. All balls in game inflict critic damage
-7. Adds two extra balls to the game
-8. Enables to break a locked brick
+![PowerUp1](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup1.png) Gain extra heart
+![PowerUp2](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup2.png) Adds 5 extra balls to the game
+![PowerUp3](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup3.png) Increase paddle size
+![PowerUp4](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup4.png) 1000 extra points
+![PowerUp5](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup5.png) All balls in game inflict 2x damage
+![PowerUp6](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup6.png) All balls in game inflict critic damage
+![PowerUp7](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup7.png) Adds two extra balls to the game
+![PowerUp8](https://github.com/daniellopes04/breakout/blob/main/graphics/powerup8.png) Enables to break a locked brick
 
 ![Screen5](https://github.com/daniellopes04/breakout/blob/main/graphics/print5.png)
 ![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)
