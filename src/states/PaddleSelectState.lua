@@ -51,7 +51,8 @@ function PaddleSelectState:update(dt)
             score = 0,
             level = 1,
             highScores = self.highScores,
-            recoverPoints = 5000
+            recoverPoints = 5000,
+            lockedInGame = false
         })    
     end
 

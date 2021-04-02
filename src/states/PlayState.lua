@@ -36,6 +36,12 @@ function PlayState:enter(params)
     -- Timer and time limit for a powerup to spawn
     self.timer = 0
     self.timeLimit = 5
+
+    -- If the key powerup is active
+    self.key = false
+
+    -- Locked bricks in game
+    self.lockedInGame = params.lockedInGame
 end
 
 function PlayState:update(dt)
@@ -57,11 +63,15 @@ function PlayState:update(dt)
     self.timer = self.timer + dt
 
     if self.timer >= self.timeLimit then
-        table.insert(self.powerups, Powerup(math.random(8)))
+        if self.lockedInGame and not self.key then
+            table.insert(self.powerups, Powerup(math.random(8)))
+        else
+            table.insert(self.powerups, Powerup(math.random(7)))
+        end
 
         self.timer = 0
-        self.timeLimit = self.timeLimit + self.timeLimit * dt 
-        - math.floor(self.score / self.recoverPoints * dt)
+        self.timeLimit = math.abs(self.timeLimit + self.timeLimit * dt 
+        - math.floor(self.score * dt / self.recoverPoints * dt))
     end
 
     -- Checks for collision between powerup and paddle and apllies its effect
@@ -93,6 +103,8 @@ function PlayState:update(dt)
                 self:insertBalls(2)
 
             elseif powerup.type == 8 then
+                -- Activates the ability to destroy a locked brick
+                self.key = true
             end
             gSounds["confirm"]:play()
 
@@ -136,42 +148,55 @@ function PlayState:update(dt)
         for k, brick in pairs(self.bricks) do
             -- Only checks brick if it is in play
             if brick.inPlay and ball:collides(brick) then
-                -- Add to score
-                self.score = self.score + (brick.tier * 200 + brick.color * 25)
+                if not brick.locked then
+                    -- Add to score
+                    self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
-                -- Takes brick out of play
-                brick:hit()
+                    -- Takes brick out of play
+                    brick:hit()
 
-                -- If the player has enough points, recover a point of health
-                if self.score > self.recoverPoints then
-                    -- Can't go above 3 hearts
-                    self.health = math.min(3, self.health + 1)
+                    -- If the player has enough points, recover a point of health
+                    if self.score > self.recoverPoints then
+                        -- Can't go above 3 hearts
+                        self.health = math.min(3, self.health + 1)
 
-                    -- Increase paddle size when player gets enough points
-                    if self.paddle.size < 4 then
-                        self.paddle:updateSize(1)
+                        -- Increase paddle size when player gets enough points
+                        if self.paddle.size < 4 then
+                            self.paddle:updateSize(1)
+                        end
+
+                        -- Multiply points to recover by 2, with 100.000 limit
+                        self.recoverPoints = math.min(100000, self.recoverPoints * 2)
+
+                        gSounds["recover"]:play()
                     end
 
-                    -- Multiply points to recover by 2, with 100.000 limit
-                    self.recoverPoints = math.min(100000, self.recoverPoints * 2)
+                    -- Go to victory screen if the player cleared all the bricks
+                    if self:checkVictory() then
+                        gSounds["victory"]:play()
 
-                    gSounds["recover"]:play()
-                end
+                        gStateMachine:change("victory", {
+                            paddle = self.paddle,
+                            bricks = self.bricks,
+                            health = self.health,
+                            score = self.score,
+                            ball = self.balls[1],
+                            level = self.level,
+                            highScores = self.highScores,
+                            recoverPoints = self.recoverPoints
+                        })
+                    end
+                elseif self.key then
+                    -- Unlocks brick
+                    brick.locked = false
+                    brick.color = 6
+                    brick.tier = 0
 
-                -- Go to victory screen if the player cleared all the bricks
-                if self:checkVictory() then
-                    gSounds["victory"]:play()
+                    -- No more locked bircks in game
+                    self.lockedInGame = false
 
-                    gStateMachine:change("victory", {
-                        paddle = self.paddle,
-                        bricks = self.bricks,
-                        health = self.health,
-                        score = self.score,
-                        ball = self.balls[1],
-                        level = self.level,
-                        highScores = self.highScores,
-                        recoverPoints = self.recoverPoints
-                    })
+                    -- Key is no longer valid
+                    self.key = false
                 end
 
                 -- Collision for bricks
@@ -233,7 +258,8 @@ function PlayState:update(dt)
                 score = self.score,
                 level = self.level,
                 highScores = self.highScores,
-                recoverPoints = self.recoverPoints
+                recoverPoints = self.recoverPoints,
+                lockedInGame = self.lockedInGame
             })
         end
     end
@@ -283,6 +309,14 @@ function PlayState:render()
     -- Renders score and health
     renderScore(self.score)
     renderHealth(self.health)
+
+    -- Renders indicator that key is active
+    if self.key then
+        if math.floor(love.timer.getTime()) % 2 == 0  then
+            love.graphics.draw(gTextures["main"], gFrames["powerups"][8],
+            VIRTUAL_WIDTH / 2 - 8, VIRTUAL_HEIGHT / 2 - 8, 0)
+        end
+    end
 
     -- Pause text
     if self.paused then

@@ -20,6 +20,7 @@ function ServeState:enter(params)
     self.level = params.level
     self.highScores = params.highScores
     self.recoverPoints = params.recoverPoints
+    self.lockedInGame = params.lockedInGame
 
     -- Initialize new ball with random color
     self.balls = {}
@@ -34,6 +35,9 @@ function ServeState:update(dt)
 
     -- The player starts the game
     if love.keyboard.wasPressed("enter") or love.keyboard.wasPressed("return") then
+        -- If level higher than 10, there is locked bricks in game
+        self.lockedInGame = self.level > 10 and true or false
+
         -- Pass the current state
         gStateMachine:change("play", {
             paddle = self.paddle,
@@ -43,7 +47,8 @@ function ServeState:update(dt)
             balls = self.balls,
             level = self.level,
             highScores = self.highScores,
-            recoverPoints = self.recoverPoints
+            recoverPoints = self.recoverPoints,
+            lockedInGame = self.lockedInGame
         })
     end
 

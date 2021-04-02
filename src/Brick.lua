@@ -45,6 +45,12 @@ palleteColors = {
         ["r"] = 251/255,
         ["g"] = 242/255,
         ["b"] = 54/255
+    },
+    --Gray
+    [6] = {
+        ["r"] = 35/255,
+        ["g"] = 35/255,
+        ["b"] = 35/255
     }
 }
 
@@ -52,6 +58,9 @@ function Brick:init(x, y)
     -- Set brick color and tier
     self.tier = 0
     self.color = 1
+
+    -- If the brick is locked
+    self.locked = false
     
     -- Set brick position and dimensions
     self.x = x
@@ -103,6 +112,9 @@ function Brick:hit()
         else
             self.color = self.color - 1
         end
+    elseif self.color == 6 then
+        self.tier = 3
+        self.color = self.color - 1
     else
         -- If we're in the first tier and the base color, remove brick
         if self.color == 1 then
@@ -125,10 +137,14 @@ end
 
 function Brick:render()
     if self.inPlay then
-        -- Multiply color by 4 (-1) to get our color offset, then add tier
-        -- This is done to draw the correct tier and color brick onto the screen
-        love.graphics.draw(gTextures["main"], 
-        gFrames["bricks"][1 + ((self.color - 1) * 4) + self.tier], self.x, self.y)
+        if self.locked then
+            love.graphics.draw(gTextures["main"], gFrames["bricks"][24], self.x, self.y)
+        else
+            -- Multiply color by 4 (-1) to get our color offset, then add tier
+            -- This is done to draw the correct tier and color brick onto the screen
+            love.graphics.draw(gTextures["main"], 
+            gFrames["bricks"][1 + ((self.color - 1) * 4) + self.tier], self.x, self.y)
+        end
     end
 end
 

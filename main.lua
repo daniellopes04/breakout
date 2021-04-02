@@ -142,7 +142,7 @@ end
 -- Renders the health hearts
 function renderHealth(health)
     -- Hearts x axis position
-    local healthX = VIRTUAL_WIDTH - 100
+    local healthX = VIRTUAL_WIDTH - 110
 
     -- Render health left
     for i = 1, health do
@@ -160,8 +160,8 @@ end
 -- Renders the current player score
 function renderScore(score)
     love.graphics.setFont(gFonts["small"])
-    love.graphics.print("Score:", VIRTUAL_WIDTH - 60, 5)
-    love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 50, 5, 40, "right")
+    love.graphics.print("Score:", VIRTUAL_WIDTH - 70, 5)
+    love.graphics.printf(tostring(score), VIRTUAL_WIDTH - 60, 5, 55, "right")
 end
 
 -- Loads high scores from a .lst file, saved in default save directory in a subfolder called "breakout"
