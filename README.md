@@ -12,11 +12,11 @@ Implementation of retro game ["Breakout"](https://en.wikipedia.org/wiki/Breakout
 - [x] Add a powerup to the game that spawns two extra Balls.
 - [x] Grow and shrink the Paddle when the player gains enough points or loses a life.
 - [x] Add a locked Brick that will only open when the player collects a second new powerup, a key, which should only spawn when such a Brick exists and randomly as per the Ball powerup.
-- [ ] Add extra powerups to the game.
 
 ## Possible updates
 
 - [x] Show visual response to when the key powerup is active.
+- [ ] Add extra powerups to the game.
 
 ## Installation
 
