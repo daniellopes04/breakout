@@ -16,7 +16,7 @@ Implementation of retro game ["Breakout"](https://en.wikipedia.org/wiki/Breakout
 ## Possible updates
 
 - [x] Show visual response to when the key powerup is active.
-- [ ] Add extra powerups to the game.
+- [x] Add extra powerups to the game.
 
 ## Installation
 
@@ -55,12 +55,12 @@ There are several powerups to enhance game experience and help the player in pro
 | Powerup                                                      | Effect                                  |
 |:------------------------------------------------------------:|-----------------------------------------|
 | <img src="graphics/powerup1.png" alt="PowerUp1" width="30"/> | Gain extra heart                        |
-| <img src="graphics/powerup2.png" alt="PowerUp2" width="30"/> | Adds 5 extra balls to the game          |
+| <img src="graphics/powerup2.png" alt="PowerUp2" width="30"/> | Adds 3 extra balls to the game          |
 | <img src="graphics/powerup3.png" alt="PowerUp3" width="30"/> | Increase paddle size                    |
 | <img src="graphics/powerup4.png" alt="PowerUp4" width="30"/> | 1000 extra points                       |
-| <img src="graphics/powerup5.png" alt="PowerUp5" width="30"/> | All balls in game inflict 2x damage     |
-| <img src="graphics/powerup6.png" alt="PowerUp6" width="30"/> | All balls in game inflict critic damage |
-| <img src="graphics/powerup7.png" alt="PowerUp7" width="30"/> | Adds two extra balls to the game        |
+| <img src="graphics/powerup5.png" alt="PowerUp5" width="30"/> | All balls in game inflict 2x damage once|
+| <img src="graphics/powerup6.png" alt="PowerUp6" width="30"/> | All balls in game inflict 4x damage once|
+| <img src="graphics/powerup7.png" alt="PowerUp7" width="30"/> | Adds one extra balls to the game        |
 | <img src="graphics/powerup8.png" alt="PowerUp8" width="30"/> | Enables to break a locked brick         |
 
 ![Screen6](https://github.com/daniellopes04/breakout/blob/main/graphics/print6.png)

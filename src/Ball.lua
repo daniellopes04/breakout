@@ -24,6 +24,9 @@ function Ball:init(skin)
 
     -- Ball color
     self.skin = skin
+
+    -- Ball damage
+    self.damage = 1
 end
 
 function Ball:collides(target)

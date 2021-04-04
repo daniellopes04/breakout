@@ -84,7 +84,7 @@ function PlayState:update(dt)
 
             elseif powerup.type == 2 then
                 -- Inserts five new balls in table
-                self:insertBalls(5)
+                self:insertBalls(3)
 
             elseif powerup.type == 3 then
                 -- Increase paddle size
@@ -94,13 +94,13 @@ function PlayState:update(dt)
                 -- 1000 extra points
                 self.score = self.score + 1000
 
-            elseif powerup.type == 5 then
-
-            elseif powerup.type == 6 then
-
+            elseif powerup.type == 5 or powerup.type == 6 then
+                for k, ball in pairs(self.balls) do
+                    ball.damage = (powerup.type * 2) - 8 
+                end
             elseif powerup.type == 7 then
                 -- Inserts two new balls in table
-                self:insertBalls(2)
+                self:insertBalls(1)
 
             elseif powerup.type == 8 then
                 -- Activates the ability to destroy a locked brick
@@ -153,7 +153,12 @@ function PlayState:update(dt)
                     self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
                     -- Takes brick out of play
-                    brick:hit()
+                    brick:hit(ball.damage)
+
+                    -- If the ball has damage increased by a powerup, reset it 
+                    if ball.damage > 1 then
+                        ball.damage = 1
+                    end
 
                     -- If the player has enough points, recover a point of health
                     if self.score > self.recoverPoints then

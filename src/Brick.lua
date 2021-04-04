@@ -80,7 +80,7 @@ function Brick:init(x, y)
     self.psystem:setEmissionArea("normal", 10, 10, 1, true)        -- spread of particles
 end
 
-function Brick:hit()
+function Brick:hit(damage)
     -- Over the particle's lifetime, we transition from first to second color
     self.psystem:setColors(
         -- First color is brick color with variyng alpha (brighter for highter tiers)
@@ -110,17 +110,17 @@ function Brick:hit()
             self.tier = self.tier - 1
             self.color = 5
         else
-            self.color = self.color - 1
+            self.color = math.max(1, self.color - damage)
         end
     elseif self.color == 6 then
         self.tier = 3
-        self.color = self.color - 1
+        self.color = math.max(1, self.color - damage)
     else
         -- If we're in the first tier and the base color, remove brick
         if self.color == 1 then
             self.inPlay = false
         else
-            self.color = self.color - 1
+            self.color = math.max(1, self.color - damage)
         end
     end
 
