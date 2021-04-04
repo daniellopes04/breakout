@@ -44,6 +44,7 @@ Simply go to ["Releases"](https://github.com/daniellopes04/breakout/releases) an
 
 * Left and right arrows to control the paddle
 * "Space" to pause the game
+* "ESC" to exit the game
 
 ![Screen3](https://github.com/daniellopes04/breakout/blob/main/graphics/print3.png)
 ![Screen4](https://github.com/daniellopes04/breakout/blob/main/graphics/print4.png)
