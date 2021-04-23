@@ -2,7 +2,7 @@
     Part of "S50's Intro to Game Development"
     Lecture 2
     
-    -- Implementation of mobile game "Flappy Bird" --
+    -- Implementation of arcade game "Breakout" --
     Made by: Daniel de Sousa
     https://github.com/daniellopes04
 ]]
