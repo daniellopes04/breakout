@@ -26,11 +26,7 @@ First, you have to install [LÖVE2D](https://love2d.org/), then run the followin
 
 ```bash
 git clone https://github.com/daniellopes04/breakout
-```
-```bash
 cd breakout
-```
-```bash
 love .
 ```
 
